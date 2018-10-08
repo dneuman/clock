@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--
+Simple html page that creates a clock for old phones with old browsers.
+Save this file in a folder (eg. as clock.html) on your computer, then
+start a web server in a terminal window from that folder.
+
+A simple way to do this is open a terminal window and move to the folder
+holding the script (don't type '$', that's your prompt):
+    $ cd path/to/folder
+
+Now find the IP address <addr> of your computer:
+    $ ipconfig getifaddr en0
+
+You should get an address such as "10.0.1.4". If not, try en1 instead of
+en0. Next start up the web server. If you have Python installed, you can
+try one of these commands:
+    $ python -m http.server 8080
+or
+    $ python3 -m http.server 8080
+or
+    $ python -m SimpleHTTPServer 8080
+
+depending on whether you have Python 3 or Python 2 available.
+
+Once running, go to the web browser on your phone and enter the link:
+    http://<addr>:8080/clock.html
+where <addr> is the IP address found earlier, eg 10.0.1.4
+
+You should see a black screen with large red numbers with the correct
+time. Pinch to zoom in or out to have the numbers fill the screen, plug
+in the phone to keep it charged, adjust the brightness, prop it up, and
+you're all set. You'll bet bigger numbers with the phone on its side. 
+
+You can now close that terminal window since your phone will keep the
+page running internally. Make sure you set up your phone settings so
+that it doesn't shut off when plugged in.
+-->
+<html>
+<head>
+<script>
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    m = checkTime(m);
+    
+    // Format for 12-hour clock instead of default 24-hour clock.
+    // Remove these two lines for 24-hour clock.
+    var sep = getSep(h);  // use sep to indicate am/pm.
+    if (h > 12) {h -= 12};  // use 12-hour clock
+    
+    document.getElementById('txt').innerHTML =
+    h + sep + m + '&nbsp;';
+    var t = setTimeout(startTime, 1000);  // 1-sec repeat
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+function getSep(h) {
+    var sep = '.';
+    if (h > 12) {sep = ':'};  // use ':' for pm values, '.' for am
+    return sep;
+}
+</script>
+</head>
+
+<body onload="startTime()" style="background-color:black;">
+<p style="font-size:40px;">'&nbsp;' <!-- Add some space at top -->
+
+<!-- Deep red color is used. Adjust color to your taste: #rrggbb -->
+<div id="txt" style="color:#bb0000; font-family:sans-serif; 
+		 font-size:256px; text-align:right;"></div>
+
+</body>
+</html>
