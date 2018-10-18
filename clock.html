@@ -42,6 +42,9 @@ function startTime() {
     var today = new Date();
     var h = today.getHours();
     var m = today.getMinutes();
+    var d = today.getDate();
+    var w = today.getDay();
+    var day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     m = checkTime(m);
     
     // Format for 12-hour clock instead of default 24-hour clock.
@@ -50,8 +53,11 @@ function startTime() {
     if (h > 12) {h -= 12};  // use 12-hour clock
     if (h == 0) {h = 12};
     
-    document.getElementById('txt').innerHTML =
-    h + sep + m + '&nbsp;';
+    var theTime = h + sep + m
+    var theDate = day[w] + '&nbsp;' + d
+    
+    document.getElementById('text').innerHTML = theTime;
+    document.getElementById('date').innerHTML = theDate;
     var t = setTimeout(startTime, 1000);  // 1-sec repeat
 }
 function checkTime(i) {
@@ -67,11 +73,13 @@ function getSep(h) {
 </head>
 
 <body onload="startTime()" style="background-color:black;">
-<p style="font-size:40px;">'&nbsp;' <!-- Add some space at top -->
-
 <!-- Deep red color is used. Adjust color to your taste: #rrggbb -->
-<div id="txt" style="color:#cc0000; font-family:sans-serif; 
-		 font-size:256px; text-align:right;"></div>
+<div id="date" style="color:#dd0000; font-family:sans-serif;
+		  font-size:64px; text-align:right;
+		  padding-top:120px; padding-right:120px;"></div>
+<div id="text" style="color:#dd0000; font-family:sans-serif; 
+		 font-size:256px; text-align:right;
+		  line-height:0.7; padding-right:120px;"></div>
 
 </body>
 </html>
