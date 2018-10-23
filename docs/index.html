@@ -29,7 +29,7 @@ where <addr> is the IP address found earlier, eg 10.0.1.4
 You should see a black screen with large red numbers with the correct
 time. Pinch to zoom in or out to have the numbers fill the screen, plug
 in the phone to keep it charged, adjust the brightness, prop it up, and
-you're all set. You'll bet bigger numbers with the phone on its side. 
+you're all set. You'll get bigger numbers with the phone on its side. 
 
 You can now close that terminal window since your phone will keep the
 page running internally. Make sure you set up your phone settings so
@@ -66,7 +66,7 @@ function checkTime(i) {
 }
 function getSep(h) {
     var sep = '.';
-    if (h > 12) {sep = ':'};  // use ':' for pm values, '.' for am
+    if (h >= 12) {sep = ':'};  // use ':' for pm values, '.' for am
     return sep;
 }
 </script>
